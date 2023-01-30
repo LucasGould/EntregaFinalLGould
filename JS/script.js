@@ -10,7 +10,7 @@ const vermu = 645
 function edad (){
     let años = prompt('Ingrese su edad:')
     if (años>17) {
-        alert('Bienvenido a ')
+        alert('Bienvenido a Drunk Sloth')
     } else {
     alert ('Acceso no permitido.')
 }} 
@@ -50,15 +50,15 @@ function menu () {
     // }
 }
 
-function carrito () {
+function carrito (bebida, cantidadElegida) {
     if (bebida === 1) {
-        alert('Se realizará la compra por $' + fernet * 1.12 *  cantidadElegida  + '\n (Precio final.)')
+        alert('Se realizará la compra de Fernet Branca con Coca-Cola por $' + fernet * 1.12 *  cantidadElegida  + '\n (Precio final.)')
     } else if (bebida === 2) {
-        alert('Se realizará la compra por $' + gin * 1.12 *  cantidadElegida  + '\n (Precio final.)')
+        alert('Se realizará la compra de Gin Bombay con Agua Tónica Sweeps por $' + gin * 1.12 *  cantidadElegida  + '\n (Precio final.)')
     } else if (bebida === 3) {
-        alert('Se realizará la compra por $' + ron * 1.12 *  cantidadElegida  + '\n (Precio final.)')
+        alert('Se realizará la compra de Ron Bacardi con Coca-Cola y Limón por $' + ron * 1.12 *  cantidadElegida  + '\n (Precio final.)')
     } else if (bebida === 4) {
-        alert('Se realizará la compra por $' + vermu * 1.12 *  cantidadElegida  + '\n (Precio final.)')
+        alert('Se realizará la compra de Vermouth Artesanal con Soda por $' + vermu * 1.12 *  cantidadElegida  + '\n (Precio final.)')
     } else {
         menu()
     }
@@ -72,27 +72,18 @@ function envio () {
 
 //          PROGRAMA
 edad()
+
+let proceso;
 do {
     const {bebidaElegida, cantidadElegida} = menu()
     let pregunta = prompt('¿Desea seguir comprando? (Si/No)')
-    if (pregunta === 'si') {
-        const {bebidaElegida, cantidadElegida} = menu()
-        pregunta = prompt('¿Desea seguir comprando? (Si/No)')
-    } else {
-        carrito
+        if (pregunta === 'si') {
+            //Cómo puedo almacenar datos? 
+            //const {bebidaElegida, cantidadElegida} = menu()
+            //let pregunta = prompt('¿Desea seguir comprando? (Si/No)')   
+        } else {
+            carrito(bebidaElegida, cantidadElegida);
+            envio();
+            proceso = 'fin'
     }
-} while (pregunta != 'no')
-carrito() 
-envio()
-
-// while (ciclo) {
-    
-//     if (pregunta = 'si') {
-//         const {bebidaElegida, cantidadElegida} = menu()
-//         let pregunta = prompt('¿Desea seguir comprando? (Si/No)')
-//     } else if () {
-//         carrito()
-//     } else {
-//         alert('Ingrese una opción válida.')
-//     }  
-// }
+} while (proceso != 'fin')

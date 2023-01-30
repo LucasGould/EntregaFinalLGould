@@ -72,19 +72,27 @@ function envio () {
 
 //          PROGRAMA
 edad()
-let ciclo = true
-
-while (ciclo) {
+do {
     const {bebidaElegida, cantidadElegida} = menu()
     let pregunta = prompt('¿Desea seguir comprando? (Si/No)')
-    if (pregunta = 'si') {
+    if (pregunta === 'si') {
         const {bebidaElegida, cantidadElegida} = menu()
-        let pregunta = prompt('¿Desea seguir comprando? (Si/No)')
-    } else if (pregunta = 'no') {
-        carrito()
+        pregunta = prompt('¿Desea seguir comprando? (Si/No)')
     } else {
-        alert('Ingrese una opción válida.')
-    }  
-}
+        carrito
+    }
+} while (pregunta != 'no')
 carrito() 
 envio()
+
+// while (ciclo) {
+    
+//     if (pregunta = 'si') {
+//         const {bebidaElegida, cantidadElegida} = menu()
+//         let pregunta = prompt('¿Desea seguir comprando? (Si/No)')
+//     } else if () {
+//         carrito()
+//     } else {
+//         alert('Ingrese una opción válida.')
+//     }  
+// }

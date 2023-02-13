@@ -1,10 +1,3 @@
-// function edad (){
-//     let anios = prompt('Ingrese su edad:')
-//     if (anios>17) {
-//         alert('Bienvenido a Drunk Sloth')
-//     } else {
-//     alert ('Acceso no permitido.')
-// }} 
 
 class Bebidas {
     constructor(id, nombre, precio, descripcion, cantidad) {
@@ -46,8 +39,8 @@ let menu = parseFloat(prompt('Ingrese la opción deseada:\n 1. Comprar bebidas. 
 
 
 //          PROGRAMA
+
 while (menu !== 4) {
-    // edad()
     if (menu === 1){
         opciones();
     }

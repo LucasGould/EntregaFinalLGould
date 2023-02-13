@@ -12,7 +12,6 @@ class Bebidas {
     this.nombre = nombre;
     this.precio = precio
     this.descripcion = descripcion
-    this.cantidad = cantidad
 }}
 
 const lista = [
@@ -33,12 +32,13 @@ let carrito = [];
 
 function verCarrito () {
     carrito.forEach((producto) =>
-    alert(`Se han seleccionado ${producto.cantidad} ${producto.nombre} por un precio de ${producto.precio * producto.cantidad}`))
+    alert(`Se ha seleccionado ${producto.nombre} por un precio de $${producto.precio}`))
 }
 
-function envio (){
+function finalizarCompra () {
+    const precioTotal = carrito.reduce((acc,trago) => acc + trago.precio, 0 );
+    alert(`El total a pagar es de $${precioTotal}`)
     prompt('Ingrese una dirección para realizar el envío (ejemplo: Calle Falsa 123)')
-    alert('Gracias por su compra!')
 }
 
 let menu = parseFloat(prompt('Ingrese la opción deseada:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
@@ -57,13 +57,8 @@ while (menu !== 4) {
     if (menu === 3){
         finalizarCompra()
     }
-    // else {
-    //     alert('Ingrese una opción válida.')
-    // }
+
     menu = parseFloat(prompt('Vuelva a ingresar una opción:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
-    }
+}
+alert('Gracias por su compra!')
 
-
-
-        // const pedido = new Bebidas (id, nombre, precio, descripcion, cantidad);
-    // carrito.push(pedido);

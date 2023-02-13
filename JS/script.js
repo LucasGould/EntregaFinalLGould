@@ -23,44 +23,47 @@ const lista = [
 ]
 
 function opciones () {
-    let id = parseFloat(prompt('Ingrese la bebida deseada: \n 1: Fernet Branca con Coca-Cola \n 2: Gin Bombay con Agua Tónica Sweeps \n 3: Ron Bacardi con Coca-Cola y Limón \n 4: Vermouth Artesanal con Soda'));
-    let cantidad = parseFloat(prompt('Ingrese la cantidad deseada'));
-    const pedido = new 'pedidoFinal' (id, nombre, precio, descripcion, cantidad);
-    carrito.push('pedidoFinal');
-    alert('Se añadió exitosamente')
+    var idIngresado = parseFloat(prompt('Ingrese la bebida deseada: \n 1: Fernet Branca con Coca-Cola \n 2: Gin Bombay con Agua Tónica Sweeps \n 3: Ron Bacardi con Coca-Cola y Limón \n 4: Vermouth Artesanal con Soda'));
+    const productoEncontrado = lista.find(producto => producto.id === idIngresado);
+    console.log(productoEncontrado);
+    carrito.push(productoEncontrado);
 }
+
+let carrito = [];
 
 function verCarrito () {
     carrito.forEach((producto) =>
     alert(`Se han seleccionado ${producto.cantidad} ${producto.nombre} por un precio de ${producto.precio * producto.cantidad}`))
 }
 
-let carrito = [];
-
 function envio (){
     prompt('Ingrese una dirección para realizar el envío (ejemplo: Calle Falsa 123)')
     alert('Gracias por su compra!')
 }
 
-var menu = parseFloat(prompt('Ingrese la opción deseada:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
+let menu = parseFloat(prompt('Ingrese la opción deseada:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
 
 
 
 //          PROGRAMA
 while (menu !== 4) {
     // edad()
-
-    if (menu == 1){
-        opciones(carrito);
+    if (menu === 1){
+        opciones();
     }
-    if (menu == 2) {
+    if (menu === 2) {
         verCarrito();
     }
-    if (menu == 3){
+    if (menu === 3){
         finalizarCompra()
     }
-    else {
-        alert('Ingrese una opción válida.')
+    // else {
+    //     alert('Ingrese una opción válida.')
+    // }
+    menu = parseFloat(prompt('Vuelva a ingresar una opción:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
     }
-    let menu2 = parseFloat(prompt('Vuelva a ingresar una opción:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
-    }
+
+
+
+        // const pedido = new Bebidas (id, nombre, precio, descripcion, cantidad);
+    // carrito.push(pedido);

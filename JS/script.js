@@ -1,10 +1,10 @@
-function edad (){
-    let anios = prompt('Ingrese su edad:')
-    if (anios>17) {
-        alert('Bienvenido a Drunk Sloth')
-    } else {
-    alert ('Acceso no permitido.')
-}} 
+// function edad (){
+//     let anios = prompt('Ingrese su edad:')
+//     if (anios>17) {
+//         alert('Bienvenido a Drunk Sloth')
+//     } else {
+//     alert ('Acceso no permitido.')
+// }} 
 
 class Bebidas {
     constructor(id, nombre, precio, descripcion, cantidad) {
@@ -25,8 +25,8 @@ const lista = [
 function opciones () {
     let id = parseFloat(prompt('Ingrese la bebida deseada: \n 1: Fernet Branca con Coca-Cola \n 2: Gin Bombay con Agua Tónica Sweeps \n 3: Ron Bacardi con Coca-Cola y Limón \n 4: Vermouth Artesanal con Soda'));
     let cantidad = parseFloat(prompt('Ingrese la cantidad deseada'));
-    const pedido = new pedidoFinal (id, nombre, precio, descripcion, cantidad);
-    carrito.push(pedidoFinal);
+    const pedido = new 'pedidoFinal' (id, nombre, precio, descripcion, cantidad);
+    carrito.push('pedidoFinal');
     alert('Se añadió exitosamente')
 }
 
@@ -42,15 +42,15 @@ function envio (){
     alert('Gracias por su compra!')
 }
 
-let menu = parseFloat(prompt('Ingrese la opción deseada:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
+var menu = parseFloat(prompt('Ingrese la opción deseada:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
 
 
 
 //          PROGRAMA
-edad(menu)
-
 while (menu !== 4) {
-    if (menu === 1){
+    // edad()
+
+    if (menu == 1){
         opciones(carrito);
     }
     if (menu == 2) {
@@ -62,5 +62,5 @@ while (menu !== 4) {
     else {
         alert('Ingrese una opción válida.')
     }
-    let menu = parseFloat(prompt('Vuelva a ingresar una opción:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
-}
+    let menu2 = parseFloat(prompt('Vuelva a ingresar una opción:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
+    }

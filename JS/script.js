@@ -1,57 +1,66 @@
 
-class Bebidas {
-    constructor(id, nombre, precio, descripcion, cantidad) {
-    this.id = id;
-    this.nombre = nombre;
-    this.precio = precio
-    this.descripcion = descripcion
-}}
-
-const lista = [
-    {id: 1, nombre: "Fernet con Coca", precio: 900, descripcion: 'Fernet Branca con Coca-Cola'},
-    {id: 2, nombre: "Gin-Tónic", precio: 850, descripcion: 'Gin Bombay con Agua Tónica Sweeps'},
-    {id: 3, nombre: "Cuba Libre", precio: 950, descripcion: 'Ron Bacardi con Coca-Cola'},
-    {id: 4, nombre: "Vermú Clásico", precio: 600, descripcion: 'Vermouth Artesanal con Soda'},
+// Listado de productos
+const list = [
+    {id: 1, nombre: "Fernet con Coca", precio: 900, descripcion: 'Fernet Branca con Coca-Cola', img:'./resources/fernet.jpg'},
+    {id: 2, nombre: "Gin-Tónic", precio: 850, descripcion: 'Gin Bombay con Agua Tónica Sweeps', img:'./resources/gin-tonic.jpg'},
+    {id: 3, nombre: "Cuba Libre", precio: 950, descripcion: 'Ron Bacardi con Coca-Cola', img:'./resources/cuba-libre.jpg'},
+    {id: 4, nombre: "Vermú Clásico", precio: 600, descripcion: 'Vermouth Artesanal con Soda', img:'./resources/vermu-soda.jpg'},
 ]
 
-function opciones () {
-    var idIngresado = parseFloat(prompt('Ingrese la bebida deseada: \n 1: Fernet Branca con Coca-Cola \n 2: Gin Bombay con Agua Tónica Sweeps \n 3: Ron Bacardi con Coca-Cola y Limón \n 4: Vermouth Artesanal con Soda'));
-    const productoEncontrado = lista.find(producto => producto.id === idIngresado);
-    console.log(productoEncontrado);
-    carrito.push(productoEncontrado);
-}
+// Array para carrito
+let cart = [];
 
-let carrito = [];
+// Display de la lista de proctos
+const cards = document.getElementById("menu")
+list.forEach((list, index) => {
+    let cardOfCards = document.createElement("div");
+    // cardOfCards.classList.add("col-sm-12", "col-lg-6", "container", "table"),
+    cardOfCards.innerHTML=
+    `<div class="card mb-2 col-md-6" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="${list.img}" class="img-fluid rounded-start" alt=${list.nombre}>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">${list.nombre}</h5>
+          <p class="card-text">${list.descripcion}</p>
+          <p class="card-text">$${list.precio}</p>
+          <a href="#" class="btn btn-primary" id= "btn-add" onClick= "addToCart(${index})">Añadir al carrito</a>
+        </div>
+      </div>
+    </div>
+  </div>`
+  cards.append(cardOfCards)
+})
 
-function verCarrito () {
-    carrito.forEach((producto) =>
-    alert(`Se ha seleccionado ${producto.nombre} por un precio de $${producto.precio}`))
-}
-
-function finalizarCompra () {
-    const precioTotal = carrito.reduce((acc,trago) => acc + trago.precio, 0 );
-    alert(`El total a pagar es de $${precioTotal}`)
-    prompt('Ingrese una dirección para realizar el envío (ejemplo: Calle Falsa 123)')
-}
-
-let menu = parseFloat(prompt('Ingrese la opción deseada:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
-
-
-
-//          PROGRAMA
-
-while (menu !== 4) {
-    if (menu === 1){
-        opciones();
+// Función para agregar productos al array de carrito + Toastify
+const addToCart = (index) => {
+    const selectedProd = cart.findIndex((e) =>{
+        return e.id === list[index].id
+    })
+    if (selectedProd === -1){
+        const addedProd = list[index];
+        addedProd.q = 1
+        cart.push(addedProd)
+        sendToLS()
+    } else {
+        cart[selectedProd].q += 1;
+        sendToLS()
     }
-    if (menu === 2) {
-        verCarrito();
-    }
-    if (menu === 3){
-        finalizarCompra()
-    }
-
-    menu = parseFloat(prompt('Vuelva a ingresar una opción:\n 1. Comprar bebidas. \n 2. Ver carrito \n 3. Finalizar compra \n 4. Salir '))
+    console.log(cart)
+    
+    Toastify({
+      text: "Añadido al Carrito",
+      duration: 3000,
+      style: {
+        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+      },
+      }).showToast();
 }
-alert('Gracias por su compra!')
 
+// Enviar carrito a LS
+const sendToLS = () => {
+    const cartJSON = JSON.stringify(cart)
+    localStorage.setItem("myCart", cartJSON)
+}

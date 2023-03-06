@@ -16,7 +16,7 @@ body {
     flex-direction: column;
     padding: 15px 70px; 
     background: rgb(27,12,26);
-    background: linear-gradient(327deg, rgba(27,12,26,1) 0%, rgba(130,72,127,1) 48%, rgba(180,119,176,1) 67%, rgba(231,174,227,1) 100%);
+    background: linear-gradient(327deg, rgb(231, 64, 219) 0%, rgb(175, 88, 170) 48%, rgba(180,119,176,1) 67%, rgba(231,174,227,1) 100%);
 }
 
 /* Banner */

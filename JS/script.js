@@ -14,7 +14,7 @@ let cart = [];
 const cards = document.getElementById("menu")
 list.forEach((list, index) => {
     let cardOfCards = document.createElement("div");
-    // cardOfCards.classList.add("card-group"),
+    cardOfCards.classList.add("card-group"),
     cardOfCards.innerHTML=`
     <div class="card mb-2 col-md-6" style="max-width: 540px">
       <div class="row g-0">

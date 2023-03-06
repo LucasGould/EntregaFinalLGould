@@ -14,23 +14,23 @@ let cart = [];
 const cards = document.getElementById("menu")
 list.forEach((list, index) => {
     let cardOfCards = document.createElement("div");
-    // cardOfCards.classList.add("col-sm-12", "col-lg-6", "container", "table"),
-    cardOfCards.innerHTML=
-    `<div class="card mb-2 col-md-6" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="${list.img}" class="img-fluid rounded-start" alt=${list.nombre}>
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">${list.nombre}</h5>
-          <p class="card-text">${list.descripcion}</p>
-          <p class="card-text">$${list.precio}</p>
-          <a href="#" class="btn btn-primary" id= "btn-add" onClick= "addToCart(${index})">Añadir al carrito</a>
+    // cardOfCards.classList.add("card-group"),
+    cardOfCards.innerHTML=`
+    <div class="card mb-2 col-md-6" style="max-width: 540px">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="${list.img}" class="img-fluid rounded-start" alt=${list.nombre}>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">${list.nombre}</h5>
+            <p class="card-text">${list.descripcion}</p>
+            <p class="card-text">$${list.precio}</p>
+            <a href="#" class="btn btn-primary" id= "btn-add" onClick= "addToCart(${index})">Añadir al carrito</a>
+          </div>
         </div>
       </div>
-    </div>
-  </div>`
+    </div>`
   cards.append(cardOfCards)
 })
 
@@ -54,7 +54,7 @@ const addToCart = (index) => {
       text: "Añadido al Carrito",
       duration: 3000,
       style: {
-        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+        backgroundColor: "linear-gradient(to right, #e7aee3, #d68cd2",
       },
       }).showToast();
 }

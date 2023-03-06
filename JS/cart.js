@@ -16,7 +16,7 @@ myCart.forEach((item) => {
     <h4 class="cart-display_name col-3">${item.nombre}</h4>
     <h4 class="cart-display_q col-3">Cantidad: ${item.q}</h4>
     <h4 class="cart-display_subtotal col-3">Subtotal: $${item.precio * item.q}</h4>
-    <button type="button col" id="btn-delete" class="btn btn-secondary" onClick="deleteItem(${item.index})">Elminar Producto</button>
+    <button type="button" id="btn-delete" class="btn btn-secondary btn-delete" onClick="deleteItem(${item.index})">Elminar Producto</button>
     `
     cartList.append(cartListItems)
 });
@@ -34,40 +34,46 @@ let total = document.createElement("li")
 total.classList.add("totals");
 total.innerHTML = `
 <h3>Total a Pagar: $${totalFunc}</h3>
-<button type="button" id="btn-fin" class="btn btn-success boton-finalizar">Finalizar Compra</button>
+<button type="button" id="btn-fin" class="btn btn-success btn-fin">Finalizar Compra</button>
 `
 totalPrice.append(total)
 
 const btnFin = document.querySelector('#btn-fin')
 btnFin.addEventListener('click', () => {
     Swal.fire({
-        title: 'Medios de Pago',
-        text: 'Elija su medio de pago:',
-        buttons: ["Efectivo", "Débito/Crédito"],
-        position: 'center',
+        title: 'Elija su medio de pago:',
+        showCancelButton: true,
+        confirmButtonText: 'Efectivo'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title:'Indique la dirección de envío',
+            input: 'text',
+          }).then(response => {
+            if (response === true) {
+            return response        
+          }})
+        }
+        const delivery = response       //Variable para enviar
+        localStorage.setItem("delivery", delivery)      // carga de variable al LS
+        storage.clear(myCart)     
     })
 })
 
 
 
-
 // Borrar item
-// const deleteItem = (index) => {
-//     const deleteProd = myCart.findIndex((e) =>{
-//         return e === myCart[index].${id}
-//     })
-//     console.log(deleteProd)
-//     // Toastify({
-    //     text: "Producto Eliminado",
-    //     duration: 3000,
-    //     style: {
-    //       backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-    //     },
-    //     }).showToast();
-//     // localStorage.removeItem(deleteProd) 
-// }
+const btnDelete = document.querySelector('#btn-delete')
 
-// const btnDelete = document.querySelector('#btn-delete')
+const deleteItem = (index) => {
+    const deleteProd = myCart.findIndex((e) =>{
+        return e.id === cartList[index].id
+    })
+    console.log(deleteProd)
+    localStorage.removeItem(deleteProd) 
+}
+
+
 
 // btnDelete.addEventListener('click', () => {
 //    localStorage.removeItem('usuario') 

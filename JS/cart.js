@@ -3,8 +3,9 @@ let myCart = JSON.parse(localStorage.getItem('myCart')) || [];
 console.log(myCart)
 
 // Carrito
-const cartList = document.querySelector('#cart-list')
+let cartList = document.querySelector('#cart-list')
 function showCart(){
+    cartList.innerHTML = ''
     myCart.forEach((item) => {
         
         let cartListItems = document.createElement("li")
@@ -28,7 +29,7 @@ function showCart(){
 
 
 // Funcion: calcular el total
-const totalFunc = myCart.reduce((acc, cart) =>{
+let totalFunc = myCart.reduce((acc, cart) =>{
     return acc + cart.precio * cart.q
 },0)
 console.log(totalFunc)
@@ -55,22 +56,34 @@ btnFin.addEventListener('click', () => {
           Swal.fire({
             title:'Indique la dirección de envío',
             input: 'text',
-        })}})
+        }).then((result) => {
+            if (result.isConfirmed) {
+            myCart = [];
+            console.clear();
+            window. history. back() ;
+            }})
+    }})
     localStorage.clear()
-    console.clear()
 })
 
 
 
 // Borrar item
 
-const deleteItem = (e) => {
+let deleteItem = (e) => {
     const id = e.target.id;
     const parsedId = parseInt(id)
     const index = myCart.findIndex (p => e.id === parsedId)
     myCart.splice(index, 1)
-    localStorage.setItem("myCart", myCart) 
+    localStorage.setItem("myCart", JSON.stringify(myCart)) 
+    
     showCart()
+    
+    let totalFunc = myCart.reduce((acc, cart) =>{
+        return acc + cart.precio * cart.q
+    },0)
+    console.log(totalFunc)
+    totalPrice.append(total)
 }
 
 showCart()

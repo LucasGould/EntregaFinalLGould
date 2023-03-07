@@ -8,7 +8,7 @@ const list = [
 ]
 
 // Array para carrito
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('myCart')) || [];
 
 // Display de la lista de proctos
 const cards = document.getElementById("menu")

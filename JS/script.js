@@ -1,42 +1,81 @@
+// Verificación de edad
+const { value: number } = Swal.fire({
+  imageUrl: 'resources/barney.png',
+  imageHeight: 200,
+  imageAlt: 'Custom image',
+  title: 'Ingrese su edad.',
+  text: 'Los productos listados en esta página son exclusivos de mayores de edad.',
+  input: 'number',
+  confirmButtonText: 'Validar',
+  allowOutsideClick: false,
+  allowEscapeKey: false,
+  color: 'blueviolet',
+  background: '#100f0f',
+}).then((result) => {
+  if (result.value >= 18) {
+    Swal.fire({
+      title: '¡Bienvenido/a!',
+      })
+  } else {
+    Swal.fire({
+      title: 'Acceso no permitido.',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      showConfirmButton: false,
+      })
+  }
+});
+
 
 // Listado de productos
-const list = [
-    {id: 1, nombre: "Fernet con Coca", precio: 900, descripcion: 'Fernet Branca con Coca-Cola', img:'./resources/fernet.jpg'},
-    {id: 2, nombre: "Gin-Tónic", precio: 850, descripcion: 'Gin Bombay con Agua Tónica Sweeps', img:'./resources/gin-tonic.jpg'},
-    {id: 3, nombre: "Cuba Libre", precio: 950, descripcion: 'Ron Bacardi con Coca-Cola', img:'./resources/cuba-libre.jpg'},
-    {id: 4, nombre: "Vermú Clásico", precio: 600, descripcion: 'Vermouth Artesanal con Soda', img:'./resources/vermu-soda.jpg'},
-]
+// const list = [
+//     {id: 1, nombre: "Fernet con Coca", precio: 900, descripcion: 'Fernet Branca con Coca-Cola', img:'./resources/fernet.jpg'},
+//     {id: 2, nombre: "Gin-Tónic", precio: 850, descripcion: 'Gin Bombay con Agua Tónica Sweeps', img:'./resources/gin-tonic.jpg'},
+//     {id: 3, nombre: "Cuba Libre", precio: 950, descripcion: 'Ron Bacardi con Coca-Cola', img:'./resources/cuba-libre.jpg'},
+//     {id: 4, nombre: "Vermú Clásico", precio: 600, descripcion: 'Vermouth Artesanal con Soda', img:'./resources/vermu-soda.jpg'},
+// ]
 
 // Array para carrito
-let cart = JSON.parse(localStorage.getItem('myCart')) || [];
+let cart = JSON.parse(sessionStorage.getItem('myCart')) || [];
 
-// Display de la lista de proctos
-const cards = document.getElementById("menu")
-list.forEach((list, index) => {
+// Traer array de datos desde data.json
+async function list() {
+  const resp = await fetch('./JS/data.json')
+  const data = await resp.json()
+  console.log(data)
+  const cards = document.getElementById("menu")
+  data.forEach((product, index) => {
     let cardOfCards = document.createElement("div");
     cardOfCards.classList.add("card-group"),
     cardOfCards.innerHTML=`
-    <div class="card mb-2 col-md-6" style="max-width: 540px">
+    <div class="card mb-2 col-md-6 cardshape" style="max-width: 540px">
       <div class="row g-0">
-        <div class="col-md-4">
-          <img src="${list.img}" class="img-fluid rounded-start" alt=${list.nombre}>
+        <div class="col-md-4 cardimage">
+          <img src="${product.img}" class="img-fluid rounded-start" alt=${product.nombre}>
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">${list.nombre}</h5>
-            <p class="card-text">${list.descripcion}</p>
-            <p class="card-text">$${list.precio}</p>
-            <a href="#" class="btn btn-primary" id= "btn-add" onClick= "addToCart(${index})">Añadir al carrito</a>
+            <h5 class="card-title">${product.nombre}</h5>
+            <p class="card-text">${product.descripcion}</p>
+            <p class="card-text">$${product.precio}</p>
+            <a class="btn btn-primary" id= "btn-add" onClick= "addToCart(${index})">Añadir al carrito</a>
           </div>
         </div>
       </div>
     </div>`
   cards.append(cardOfCards)
-})
+  })
+}
 
-// Función para agregar productos al array de carrito + Toastify
-const addToCart = (index) => {
-    const selectedProd = cart.findIndex((e) =>{
+list()
+
+
+// Función para agregar productos al array Cart + Toastify
+const addToCart = async (index) => {
+  const resp = await fetch('./JS/data.json')
+  const list = await resp.json()
+  
+  const selectedProd = cart.findIndex((e) =>{
         return e.id === list[index].id
     })
     if (selectedProd === -1){
@@ -62,5 +101,5 @@ const addToCart = (index) => {
 // Enviar carrito a LS
 const sendToLS = () => {
     const cartJSON = JSON.stringify(cart)
-    localStorage.setItem("myCart", cartJSON)
+    sessionStorage.setItem("myCart", cartJSON)
 }

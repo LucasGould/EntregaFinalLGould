@@ -1,5 +1,5 @@
 // Array de script.js
-let myCart = JSON.parse(localStorage.getItem('myCart')) || [];
+let myCart = JSON.parse(sessionStorage.getItem('myCart')) || [];
 console.log(myCart)
 
 // Carrito
@@ -26,21 +26,36 @@ function showCart(){
     buttons.forEach (btn => btn.addEventListener('click', deleteItem))
 }
 
-
-
 // Funcion: calcular el total
-let totalFunc = myCart.reduce((acc, cart) =>{
-    return acc + cart.precio * cart.q
-},0)
-console.log(totalFunc)
+function finalPrice () {
+    let totalFunc = myCart.reduce((acc, cart) =>{
+        return acc + cart.precio * cart.q
+    },0)
+    console.log(totalFunc)
+    return totalFunc
+}
 
+// Borrar item
+let deleteItem = (e) => {
+    const id = e.target.id;
+    const parsedId = parseInt(id)
+    const index = myCart.findIndex (e => e.id === parsedId)
+    myCart.splice(index, 1)
+    sessionStorage.setItem("myCart", JSON.stringify(myCart)) 
+    
+    showCart()
+    
+    // Recalcular precio
+    finalPrice()
+
+}
 
 // Precio final + Botón pagar
 const totalPrice = document.querySelector('#total-price')
 let total = document.createElement("li")
 total.classList.add("totals");
 total.innerHTML = `
-<h3>Total a Pagar: $${totalFunc}</h3>
+<h3>Total a Pagar: $${parseFloat(finalPrice())}</h3>
 <button type="button" id="btn-fin" class="btn btn-success btn-fin">Finalizar Compra</button>
 `
 totalPrice.append(total)
@@ -50,12 +65,15 @@ btnFin.addEventListener('click', () => {
     Swal.fire({
         title: 'Elija su medio de pago:',
         showCancelButton: true,
-        confirmButtonText: 'Efectivo'
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Tarjeta de Débito'
     }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire({
             title:'Indique la dirección de envío',
             input: 'text',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
         }).then((result) => {
             if (result.isConfirmed) {
             myCart = [];
@@ -63,27 +81,8 @@ btnFin.addEventListener('click', () => {
             window. history. back() ;
             }})
     }})
-    localStorage.clear()
+    sessionStorage.clear()
 })
 
-
-
-// Borrar item
-
-let deleteItem = (e) => {
-    const id = e.target.id;
-    const parsedId = parseInt(id)
-    const index = myCart.findIndex (p => e.id === parsedId)
-    myCart.splice(index, 1)
-    localStorage.setItem("myCart", JSON.stringify(myCart)) 
-    
-    showCart()
-    
-    let totalFunc = myCart.reduce((acc, cart) =>{
-        return acc + cart.precio * cart.q
-    },0)
-    console.log(totalFunc)
-    totalPrice.append(total)
-}
 
 showCart()

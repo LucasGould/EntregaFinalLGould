@@ -1,0 +1,16 @@
+[
+    {"id": 1, "nombre": "Fernet con Coca", "precio": 900, "descripcion": "Fernet Branca con Coca-Cola", "img":"./resources/fernet.jpg"},
+    {"id": 2, "nombre": "Gin-Tónic", "precio": 950, "descripcion": "Gin Gordon's con Agua Tónica Sweeps", "img":"./resources/gin-tonic.jpg"},
+    {"id": 3, "nombre": "Cuba Libre", "precio": 950, "descripcion": "Ron Bacardi con Coca-Cola", "img":"./resources/cuba-libre.jpg"},
+    {"id": 4, "nombre": "Vermú Clásico", "precio": 600, "descripcion": "Vermouth Artesanal con Soda" , "img":"./resources/vermu-soda.jpg"},
+    {"id": 5, "nombre": "Aperol Spritz", "precio": 1050, "descripcion": "Prosecco Brut con Aperol, naranja y un dash de agua con gas." , "img":"./resources/aperol_spritz.jpg"},
+    {"id": 6, "nombre": "Daiquirí Original", "precio": 925, "descripcion": "Ron Bacardí Blanco, con limón y azúcar." , "img":"./resources/daiquiri_limon.jpg"},
+    {"id": 7, "nombre": "Manhattan", "precio": 1100, "descripcion": "Whiskey Grant's con Vermouth Artesanal y Bitter Angostura." , "img":"./resources/manhattan.jpg"}
+    ,{"id": 8, "nombre": "Margarita", "precio": 1020, "descripcion": "Tequila José Cuervo con Triple Sec Tres Plumas, con jugo de limón y almibar" , "img":"./resources/margarita.jpg"}
+    ,{"id": 9, "nombre": "Piña Colada", "precio": 950, "descripcion": "Ron Bacardí con leche de coco y pulpa de ananá." , "img":"./resources/pinacolada.jpg"},
+    {"id": 10, "nombre": "Tequila Sunrise", "precio": 825, "descripcion": "Tequila José Cuervo y Granadina con jugo de naranja." , "img":"./resources/tequila_sunris.jpg"},
+    {"id": 11, "nombre": "Caipirinha", "precio": 800, "descripcion": "Cachaça Velho Barreiro con lima y azúcar." , "img":"./resources/caipirinha.png"},
+    {"id": 12, "nombre": "Caipiroska", "precio": 850, "descripcion": "Vodka Absolut con lima y almíbar." , "img":"./resources/caipiroska.png"},
+    {"id": 13, "nombre": "Mojito", "precio": 925, "descripcion": "Ron Bacardí con hojas de menta, jugo de lima y azúcar." , "img":"./resources/mojito.png"},
+    {"id": 14, "nombre": "Negroni", "precio": 1050, "descripcion": "Gin Gordon's con Vermouth Artesanal y Campari" , "img":"./resources/negroni.png"}
+]

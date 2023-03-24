@@ -1,31 +1,38 @@
 // Verificación de edad
-const { value: number } = Swal.fire({
-  imageUrl: 'resources/barney.png',
-  imageHeight: 200,
-  imageAlt: 'Custom image',
-  title: 'Ingrese su edad.',
-  text: 'Los productos listados en esta página son exclusivos de mayores de edad.',
-  input: 'number',
-  confirmButtonText: 'Validar',
-  allowOutsideClick: false,
-  allowEscapeKey: false,
-  color: 'blueviolet',
-  background: '#100f0f',
-}).then((result) => {
-  if (result.value >= 18) {
-    Swal.fire({
-      title: '¡Bienvenido/a!',
-      })
+let age = JSON.parse(localStorage.getItem('age')) || [];
+if (age === JSON.parse(localStorage.getItem('age'))) {
+  console.log(age)
   } else {
-    Swal.fire({
-      title: 'Acceso no permitido.',
-      allowOutsideClick: false,
-      allowEscapeKey: false,
-      showConfirmButton: false,
-      })
-  }
-});
-
+  const { value: number } = Swal.fire({
+    imageUrl: 'resources/barney.png',
+    imageHeight: 200,
+    imageAlt: 'Custom image',
+    title: 'Ingrese su edad.',
+    text: 'Los productos listados en esta página son exclusivos de mayores de edad.',
+    input: 'number',
+    confirmButtonText: 'Validar',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+    color: 'blueviolet',
+    background: '#100f0f',
+  }).then((result) => {
+    if (result.value >= 18) {
+      Swal.fire({
+        title: '¡Bienvenido/a!',
+        })
+    } else {
+      Swal.fire({
+        title: 'Acceso no permitido.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        })
+    }
+    const age = JSON.stringify(result.value)
+    localStorage.setItem("age", age)
+    console.log(age)
+  });
+}
 
 // Listado de productos
 // const list = [
@@ -82,10 +89,10 @@ const addToCart = async (index) => {
         const addedProd = list[index];
         addedProd.q = 1
         cart.push(addedProd)
-        sendToLS()
+        sendToSS()
     } else {
         cart[selectedProd].q += 1;
-        sendToLS()
+        sendToSS()
     }
     console.log(cart)
     
@@ -98,8 +105,8 @@ const addToCart = async (index) => {
       }).showToast();
 }
 
-// Enviar carrito a LS
-const sendToLS = () => {
+// Enviar carrito a SS
+const sendToSS = () => {
     const cartJSON = JSON.stringify(cart)
     sessionStorage.setItem("myCart", cartJSON)
 }

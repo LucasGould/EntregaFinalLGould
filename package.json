@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "cleave.js": "^1.6.0",
     "sweetalert2": "^11.7.3",
     "toastify-js": "^1.12.0"
   }

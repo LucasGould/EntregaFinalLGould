@@ -50,39 +50,44 @@ let deleteItem = (e) => {
 
 }
 
-// Precio final + Botón pagar
+// Precio final
 const totalPrice = document.querySelector('#total-price')
 let total = document.createElement("li")
 total.classList.add("totals");
 total.innerHTML = `
 <h3>Total a Pagar: $${parseFloat(finalPrice())}</h3>
-<button type="button" id="btn-fin" class="btn btn-success btn-fin">Finalizar Compra</button>
+<button type="button" id="btn-fin"" class="btn btn-success btn-fin" onClick= "pay()">Finalizar Compra</button>
 `
 totalPrice.append(total)
 
-const btnFin = document.querySelector('#btn-fin')
-btnFin.addEventListener('click', () => {
-    Swal.fire({
-        title: 'Elija su medio de pago:',
-        showCancelButton: true,
-        cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Tarjeta de Débito'
-    }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title:'Indique la dirección de envío',
-            input: 'text',
-            showCancelButton: true,
-            cancelButtonText: 'Cancelar',
-        }).then((result) => {
-            if (result.isConfirmed) {
-            myCart = [];
-            console.clear();
-            window. history. back() ;
-            }})
-    }})
-    sessionStorage.clear()
-})
+// Botón para pagar// 
+const pay = () => {
+    document.querySelector('.modal').classList.add('active');
+    document.querySelector('.overlay').classList.add('active');
+}
 
+// Cleave para modal
+new Cleave('.cel',{
+    prefix: '+54',
+    delimiter: ' ',
+    blocks: [3,2,4,4]
+});
+new Cleave('.creditcard',{
+    creditCard: true,
+    delimiter: '-',
+    onCreditCardTypeChanged: function (type) {
+        if (type === 'visa') {
+            document.querySelector('.fa-cc-visa').classList.add('active');
+        } else if (type === 'mastercard'){
+            document.querySelector('.fa-cc-mastercard').classList.add('active');
+        } else if (type === 'amex'){
+            document.querySelector('.fa-cc-amex').classList.add('active');
+        } else {
+            document.querySelector('.fa-cc-visa').classList.remove('active');
+            document.querySelector('.fa-cc-mastercard').classList.remove('active');
+            document.querySelector('.fa-cc-amex').classList.remove('active')
+        }
+    }
+});
 
 showCart()

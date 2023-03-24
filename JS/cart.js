@@ -60,10 +60,15 @@ total.innerHTML = `
 `
 totalPrice.append(total)
 
-// Botón para pagar// 
+// Botón finalizar compra// 
 const pay = () => {
     document.querySelector('.modal').classList.add('active');
     document.querySelector('.overlay').classList.add('active');
+}
+
+const goBack = () => {
+    document.querySelector('.modal').classList.remove('active');
+    document.querySelector('.overlay').classList.remove('active');
 }
 
 // Cleave para modal
@@ -89,5 +94,10 @@ new Cleave('.creditcard',{
         }
     }
 });
+
+// Boton pagar
+const send = () => {
+    sessionStorage.clear()
+}
 
 showCart()

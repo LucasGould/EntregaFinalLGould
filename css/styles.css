@@ -10,6 +10,10 @@
     font-style: normal; 
 }
 
+a {
+    text-decoration: none;
+}
+
 body {
     min-height: 100vh;
     display: flex;
@@ -211,6 +215,7 @@ i.active {
 .enviar {
     margin-bottom: 25px;
     margin-top: 10px;
+    color:rgb(236, 236, 236)
 }
 
 footer{
